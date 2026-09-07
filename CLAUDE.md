@@ -2,7 +2,36 @@
 
 # Imposter
 
-Mobile-first website built with Next.js (App Router), TypeScript and Tailwind CSS v4. Deployed on Vercel.
+**Imposter** — a pass-the-phone party game. Mobile-first website built with Next.js (App Router), TypeScript and Tailwind CSS v4. Deployed on Vercel.
+
+## How the game works
+
+1. Setup: number of players (3–12), language (`en` / `sr`), categories (empty selection = all), imposter hint on/off.
+2. Start: one random word is drawn from the chosen categories (weighted per word, not per category). One random player index is the imposter.
+3. Players pass the phone. Each taps their card → "make sure nobody is looking" → Reveal → sees the word, or IMPOSTER (+ hint if enabled) → Hide & pass. Opened cards become "taken".
+4. When all cards are taken: discuss, optionally "Show imposter", then new round or back to setup.
+
+## Data & persistence (no database)
+
+- **Words live in JSON files on the server**: `src/data/categories/*.json`. One file per category:
+  `{ id, name: {en, sr}, words: [{ en: {word, hint}, sr: {word, hint} }] }`.
+  To add a category: drop a file there and register it in `src/data/index.ts`. Every word must have both languages and a hint.
+- `src/app/page.tsx` is a Server Component that imports the data and passes it to the client `<App>` — static at build time, no API routes.
+- **Everything the user enters is stored in localStorage** via `useLocalStorage` in `src/lib/storage.ts`:
+  - `imposter:settings` — setup form (players, language, categories, hint)
+  - `imposter:game` — the round in progress, so a refresh doesn't lose it
+  Never add server-side user state.
+
+## Design language
+
+Retro Watch Dogs 2 / DedSec hacker aesthetic with floating cards:
+- Near-black background with cyan blueprint grid, CRT scanlines overlay (`body::before`), dark vignette.
+- Palette tokens in `globals.css`: `pink` #ff2a6d, `cyan` #05d9e8, `yellow` #f9f002, `lime` #7cff01, `bg`, `bg-2`, `fg`, `muted`, `ink`.
+- Fonts: Bungee (`font-display`) for headings/buttons, Space Grotesk (body), Space Mono (labels, tags).
+- Shapes: `cut-corners` / `cut-corners-sm` clip-path. Offset "sticker" shadows via `hard-shadow-{color}` — **must go on a wrapper** around the clipped element (clip-path clips box-shadow; the utility uses drop-shadow). Add class `press` on that wrapper to drop the shadow while pressed.
+- `<Sticker>` = small rotated label. `<Button>` = chunky cut-corner button with variants pink/cyan/yellow/ghost.
+- Floating: `animate-float` / `animate-float-slow` with per-element `--tilt` CSS var for a hand-placed look. `.glitch` + `data-text` for the RGB-split title.
+- Respect `prefers-reduced-motion` (handled globally).
 
 ## Commands
 
@@ -28,17 +57,30 @@ npm run lint    # ESLint
 - Safe-area insets are applied on `<body>` in `globals.css`; `viewportFit: "cover"` is set in `layout.tsx`. Do not remove.
 - Use `next/image` for all images with explicit `sizes` for responsive loading.
 - Keep client JS small: default to Server Components, add `"use client"` only where interaction is needed.
-- Test every UI change at 375px width first (iPhone SE / small Android), then tablet and desktop.
+- Test every UI change at 375–390px width first (iPhone SE / small Android), then tablet and desktop.
+- UI text must go through `src/lib/i18n.ts` — never hardcode English strings in components.
 - Colors come from CSS variables in `globals.css` (`--background`, `--foreground`, `--muted`, `--accent`), which support light and dark via `prefers-color-scheme`. Reference them as Tailwind classes (`bg-background`, `text-muted`, etc.).
 
 ## Project layout
 
 ```
 src/app/
-  layout.tsx    # root layout, metadata, viewport
-  page.tsx      # home page
-  globals.css   # Tailwind import, theme tokens, base mobile styles
-public/         # static assets
+  layout.tsx        # root layout, fonts, metadata, viewport
+  page.tsx          # server component: loads word data → <App>
+  globals.css       # Tailwind import, theme tokens, keyframes, utilities
+src/components/
+  App.tsx           # client root: localStorage state, setup ↔ game switch
+  Setup.tsx         # settings form
+  Game.tsx          # card grid, reveal overlay, end of round
+  Button.tsx, Sticker.tsx
+src/lib/
+  types.ts          # Settings, Game, Category types + defaults/limits
+  game.ts           # createGame(): pure word/imposter selection
+  i18n.ts           # UI strings for en/sr (t(lang))
+  storage.ts        # useLocalStorage hook (SSR-safe)
+src/data/
+  index.ts          # registers category files
+  categories/*.json # word lists
 ```
 
 ## Conventions

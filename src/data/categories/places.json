@@ -1,0 +1,16 @@
+{
+  "id": "places",
+  "name": { "en": "Places", "sr": "Mesta" },
+  "words": [
+    { "en": { "word": "Beach", "hint": "Sand" }, "sr": { "word": "Plaža", "hint": "Pesak" } },
+    { "en": { "word": "Hospital", "hint": "Doctor" }, "sr": { "word": "Bolnica", "hint": "Doktor" } },
+    { "en": { "word": "School", "hint": "Teacher" }, "sr": { "word": "Škola", "hint": "Učitelj" } },
+    { "en": { "word": "Airport", "hint": "Plane" }, "sr": { "word": "Aerodrom", "hint": "Avion" } },
+    { "en": { "word": "Cinema", "hint": "Popcorn" }, "sr": { "word": "Bioskop", "hint": "Kokice" } },
+    { "en": { "word": "Gym", "hint": "Weights" }, "sr": { "word": "Teretana", "hint": "Tegovi" } },
+    { "en": { "word": "Library", "hint": "Silence" }, "sr": { "word": "Biblioteka", "hint": "Tišina" } },
+    { "en": { "word": "Prison", "hint": "Bars" }, "sr": { "word": "Zatvor", "hint": "Rešetke" } },
+    { "en": { "word": "Casino", "hint": "Luck" }, "sr": { "word": "Kazino", "hint": "Sreća" } },
+    { "en": { "word": "Church", "hint": "Bell" }, "sr": { "word": "Crkva", "hint": "Zvono" } }
+  ]
+}

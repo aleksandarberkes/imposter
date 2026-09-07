@@ -1,0 +1,16 @@
+{
+  "id": "animals",
+  "name": { "en": "Animals", "sr": "Životinje" },
+  "words": [
+    { "en": { "word": "Lion", "hint": "Savanna" }, "sr": { "word": "Lav", "hint": "Savana" } },
+    { "en": { "word": "Elephant", "hint": "Trunk" }, "sr": { "word": "Slon", "hint": "Surla" } },
+    { "en": { "word": "Penguin", "hint": "Ice" }, "sr": { "word": "Pingvin", "hint": "Led" } },
+    { "en": { "word": "Shark", "hint": "Ocean" }, "sr": { "word": "Ajkula", "hint": "Okean" } },
+    { "en": { "word": "Eagle", "hint": "Sky" }, "sr": { "word": "Orao", "hint": "Nebo" } },
+    { "en": { "word": "Kangaroo", "hint": "Pouch" }, "sr": { "word": "Kengur", "hint": "Torba" } },
+    { "en": { "word": "Snake", "hint": "Venom" }, "sr": { "word": "Zmija", "hint": "Otrov" } },
+    { "en": { "word": "Dolphin", "hint": "Smart" }, "sr": { "word": "Delfin", "hint": "Pametan" } },
+    { "en": { "word": "Wolf", "hint": "Pack" }, "sr": { "word": "Vuk", "hint": "Čopor" } },
+    { "en": { "word": "Giraffe", "hint": "Neck" }, "sr": { "word": "Žirafa", "hint": "Vrat" } }
+  ]
+}

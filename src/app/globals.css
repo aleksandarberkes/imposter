@@ -1,49 +1,176 @@
 @import "tailwindcss";
 
+/* ---------- DedSec-flavoured palette ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --muted: #6b7280;
-  --accent: #2563eb;
+  --bg: #0a0a0c;
+  --bg-2: #141418;
+  --fg: #f4f4f5;
+  --muted: #9a9aa6;
+  --pink: #ff2a6d;
+  --cyan: #05d9e8;
+  --yellow: #f9f002;
+  --lime: #7cff01;
+  --ink: #000000;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-fg: var(--fg);
   --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-pink: var(--pink);
+  --color-cyan: var(--cyan);
+  --color-yellow: var(--yellow);
+  --color-lime: var(--lime);
+  --color-ink: var(--ink);
+  --font-display: var(--font-bungee);
+  --font-sans: var(--font-grotesk);
+  --font-mono: var(--font-space-mono);
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-flicker: flicker 4s linear infinite;
+  --animate-pop: pop 0.25s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  --animate-slide-up: slide-up 0.3s cubic-bezier(0.2, 0.9, 0.3, 1) both;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #9ca3af;
-    --accent: #60a5fa;
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+  50% { transform: translateY(-8px) rotate(var(--tilt, 0deg)); }
+}
+@keyframes flicker {
+  0%, 97%, 100% { opacity: 1; }
+  98% { opacity: 0.6; }
+  99% { opacity: 0.9; }
+}
+@keyframes pop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes slide-up {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes glitch-a {
+  0%, 100% { clip-path: inset(0 0 92% 0); transform: translate(-3px, -2px); }
+  20% { clip-path: inset(30% 0 50% 0); transform: translate(3px, 1px); }
+  40% { clip-path: inset(70% 0 5% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(10% 0 70% 0); transform: translate(2px, -1px); }
+  80% { clip-path: inset(50% 0 20% 0); transform: translate(-3px, 1px); }
+}
+@keyframes glitch-b {
+  0%, 100% { clip-path: inset(80% 0 5% 0); transform: translate(3px, 1px); }
+  25% { clip-path: inset(5% 0 80% 0); transform: translate(-3px, -1px); }
+  50% { clip-path: inset(40% 0 40% 0); transform: translate(2px, 2px); }
+  75% { clip-path: inset(60% 0 10% 0); transform: translate(-2px, -2px); }
 }
 
 html {
-  /* Stable viewport height on mobile browsers with dynamic toolbars */
   min-height: 100dvh;
   -webkit-text-size-adjust: 100%;
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
-  /* Respect notches / home indicator on iOS */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   overscroll-behavior-y: none;
+  /* blueprint grid */
+  background-image:
+    linear-gradient(rgba(5, 217, 232, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(5, 217, 232, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  position: relative;
 }
 
-/* Remove the tap highlight flash on touch devices */
+/* CRT scanlines + vignette overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.12) 0px,
+      rgba(0, 0, 0, 0.12) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+}
+
 a, button {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* ---------- utilities ---------- */
+@utility font-display {
+  font-family: var(--font-display), Impact, sans-serif;
+}
+
+/* chunky offset "sticker" shadow. clip-path clips box-shadow, so apply this
+   on a WRAPPER around the clipped element; drop-shadow follows the cut shape. */
+@utility hard-shadow-* {
+  filter: drop-shadow(5px 5px 0 --value(--color-*));
+}
+.press:has(:active) {
+  filter: none;
+}
+
+/* corner-cut shape, DedSec style */
+@utility cut-corners {
+  clip-path: polygon(
+    12px 0, 100% 0, 100% calc(100% - 12px),
+    calc(100% - 12px) 100%, 0 100%, 0 12px
+  );
+}
+@utility cut-corners-sm {
+  clip-path: polygon(
+    8px 0, 100% 0, 100% calc(100% - 8px),
+    calc(100% - 8px) 100%, 0 100%, 0 8px
+  );
+}
+
+/* glitch text: set data-text to the same string */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.glitch::before {
+  color: var(--cyan);
+  animation: glitch-a 3s infinite linear alternate-reverse;
+}
+.glitch::after {
+  color: var(--pink);
+  animation: glitch-b 2.4s infinite linear alternate-reverse;
+}
+
+/* diagonal hazard stripes */
+.stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--yellow) 0 10px,
+    var(--ink) 10px 20px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
