@@ -4,8 +4,20 @@ export type LocalizedWord = { word: string; hint: string };
 
 export type WordEntry = Record<Language, LocalizedWord>;
 
+export type GroupId =
+  | "everyday"
+  | "geography"
+  | "games"
+  | "entertainment"
+  | "music"
+  | "sports";
+
 export type Category = {
   id: string;
+  /** Picker section this category belongs to. */
+  group: GroupId;
+  /** Single emoji shown next to the name. */
+  icon: string;
   name: Record<Language, string>;
   words: WordEntry[];
 };

@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "./Button";
+import { CategoryPicker } from "./CategoryPicker";
 import { Sticker } from "./Sticker";
 import { t } from "@/lib/i18n";
 import {
@@ -20,20 +22,17 @@ type Props = {
 
 export function Setup({ settings, categories, onChange, onStart }: Props) {
   const s = t(settings.language);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const allSelected = settings.categories.length === 0;
+  const chosen = allSelected
+    ? categories
+    : categories.filter((c) => settings.categories.includes(c.id));
+  const wordCount = chosen.reduce((n, c) => n + c.words.length, 0);
 
   const setPlayers = (n: number) =>
     onChange({ ...settings, players: Math.min(MAX_PLAYERS, Math.max(MIN_PLAYERS, n)) });
 
   const setLanguage = (language: Language) => onChange({ ...settings, language });
-
-  const toggleCategory = (id: string) => {
-    const next = settings.categories.includes(id)
-      ? settings.categories.filter((c) => c !== id)
-      : [...settings.categories, id];
-    // Selecting every category individually is the same as "all".
-    onChange({ ...settings, categories: next.length === categories.length ? [] : next });
-  };
 
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-4 pb-10 pt-8 sm:max-w-lg sm:px-6">
@@ -80,21 +79,27 @@ export function Setup({ settings, categories, onChange, onStart }: Props) {
 
       {/* Categories */}
       <Panel label={s.categories} tilt={-0.6} color="yellow">
-        <div className="flex flex-wrap gap-2">
-          <Chip active={allSelected} onClick={() => onChange({ ...settings, categories: [] })}>
-            {s.all}
-          </Chip>
-          {categories.map((c) => (
-            <Chip
-              key={c.id}
-              active={!allSelected && settings.categories.includes(c.id)}
-              onClick={() => toggleCategory(c.id)}
-            >
-              {c.name[settings.language]}
-              <span className="ml-1 font-mono text-[10px] opacity-60">{c.words.length}</span>
-            </Chip>
-          ))}
-        </div>
+        <button
+          type="button"
+          onClick={() => setPickerOpen(true)}
+          className="flex min-h-11 w-full items-center justify-between gap-3 text-left"
+        >
+          <span className="min-w-0">
+            <span className="block font-display text-lg leading-tight text-fg">
+              {allSelected
+                ? s.allCategories
+                : `${chosen.length}/${categories.length} ${s.selected}`}
+            </span>
+            <span className="mt-1 block truncate font-mono text-[11px] uppercase tracking-widest text-muted">
+              {wordCount} {s.words} ·{" "}
+              {chosen.slice(0, 6).map((c) => c.icon).join(" ")}
+              {chosen.length > 6 ? " …" : ""}
+            </span>
+          </span>
+          <span className="cut-corners-sm shrink-0 bg-yellow px-3 py-2 font-display text-sm text-ink">
+            {s.pick} ›
+          </span>
+        </button>
       </Panel>
 
       {/* Hint */}
@@ -125,6 +130,16 @@ export function Setup({ settings, categories, onChange, onStart }: Props) {
         </Button>
         <p className="mt-3 text-center font-mono text-[11px] text-muted">{s.saved}</p>
       </div>
+
+      {pickerOpen && (
+        <CategoryPicker
+          categories={categories}
+          value={settings.categories}
+          language={settings.language}
+          onChange={(next) => onChange({ ...settings, categories: next })}
+          onClose={() => setPickerOpen(false)}
+        />
+      )}
     </main>
   );
 }

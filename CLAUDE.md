@@ -14,8 +14,12 @@
 ## Data & persistence (no database)
 
 - **Words live in JSON files on the server**: `src/data/categories/*.json`. One file per category:
-  `{ id, name: {en, sr}, words: [{ en: {word, hint}, sr: {word, hint} }] }`.
+  `{ id, group, icon, name: {en, sr}, words: [{ en: {word, hint}, sr: {word, hint} }] }`.
+  `group` is one of the ids in `src/data/groups.ts` (everyday, geography, entertainment, games, music, sports); `icon` is one emoji.
   To add a category: drop a file there and register it in `src/data/index.ts`. Every word must have both languages and a hint.
+- **Word count guideline**: narrow/fandom categories (superheroes, MTG, anime…) 20–30 of the most popular items; broad categories (animals, food, professions…) 50–80. Popular and describable beats obscure.
+- **Validate after editing data**: `npm run words:check` (checks schema, counts, duplicates, hint ≠ word). Run it before committing.
+- Category picking: `settings.categories` empty = all. `<CategoryPicker>` is a full-screen sheet grouped by section with per-group select-all; it never lets the selection drop to zero.
 - `src/app/page.tsx` is a Server Component that imports the data and passes it to the client `<App>` — static at build time, no API routes.
 - **Everything the user enters is stored in localStorage** via `useLocalStorage` in `src/lib/storage.ts`:
   - `imposter:settings` — setup form (players, language, categories, hint)
@@ -39,6 +43,7 @@ Retro Watch Dogs 2 / DedSec hacker aesthetic with floating cards:
 npm run dev     # local dev server (Turbopack) at http://localhost:3000
 npm run build   # production build — run before pushing
 npm run lint    # ESLint
+npm run words:check  # validate src/data/categories/*.json
 ```
 
 ## Stack
@@ -71,6 +76,7 @@ src/app/
 src/components/
   App.tsx           # client root: localStorage state, setup ↔ game switch
   Setup.tsx         # settings form
+  CategoryPicker.tsx# full-screen grouped category sheet
   Game.tsx          # card grid, reveal overlay, end of round
   Button.tsx, Sticker.tsx
 src/lib/
@@ -80,7 +86,10 @@ src/lib/
   storage.ts        # useLocalStorage hook (SSR-safe)
 src/data/
   index.ts          # registers category files
+  groups.ts         # picker sections (id, icon, localized name)
   categories/*.json # word lists
+scripts/
+  validate-words.mjs
 ```
 
 ## Conventions

@@ -1,5 +1,7 @@
 {
   "id": "landmarks",
+  "group": "geography",
+  "icon": "🗽",
   "name": { "en": "Landmarks", "sr": "Znamenitosti" },
   "words": [
     { "en": { "word": "Eiffel Tower", "hint": "Iron" }, "sr": { "word": "Ajfelov toranj", "hint": "Gvožđe" } },
@@ -11,6 +13,26 @@
     { "en": { "word": "Big Ben", "hint": "Clock" }, "sr": { "word": "Big Ben", "hint": "Sat" } },
     { "en": { "word": "Kalemegdan", "hint": "Fortress" }, "sr": { "word": "Kalemegdan", "hint": "Tvrđava" } },
     { "en": { "word": "Stonehenge", "hint": "Stones" }, "sr": { "word": "Stounhendž", "hint": "Kamenje" } },
-    { "en": { "word": "Christ the Redeemer", "hint": "Arms" }, "sr": { "word": "Hrist Iskupitelj", "hint": "Ruke" } }
+    { "en": { "word": "Christ the Redeemer", "hint": "Arms" }, "sr": { "word": "Hrist Iskupitelj", "hint": "Ruke" } },
+    { "en": { "word": "Leaning Tower of Pisa", "hint": "Tilted" }, "sr": { "word": "Krivi toranj u Pizi", "hint": "Nakrivljen" } },
+    { "en": { "word": "Sagrada Família", "hint": "Unfinished" }, "sr": { "word": "Sagrada Familija", "hint": "Nedovršena" } },
+    { "en": { "word": "Acropolis", "hint": "Columns" }, "sr": { "word": "Akropolj", "hint": "Stubovi" } },
+    { "en": { "word": "Machu Picchu", "hint": "Inca" }, "sr": { "word": "Maču Pikču", "hint": "Inke" } },
+    { "en": { "word": "Golden Gate Bridge", "hint": "Red" }, "sr": { "word": "Golden Gejt", "hint": "Crven" } },
+    { "en": { "word": "Sydney Opera House", "hint": "Sails" }, "sr": { "word": "Sidnejska opera", "hint": "Jedra" } },
+    { "en": { "word": "Burj Khalifa", "hint": "Tallest" }, "sr": { "word": "Burdž Kalifa", "hint": "Najviši" } },
+    { "en": { "word": "Kremlin", "hint": "Red Square" }, "sr": { "word": "Kremlj", "hint": "Crveni trg" } },
+    { "en": { "word": "Buckingham Palace", "hint": "Guards" }, "sr": { "word": "Bakingemska palata", "hint": "Gardisti" } },
+    { "en": { "word": "Louvre", "hint": "Mona Lisa" }, "sr": { "word": "Luvr", "hint": "Mona Liza" } },
+    { "en": { "word": "Notre-Dame", "hint": "Hunchback" }, "sr": { "word": "Notr Dam", "hint": "Zvonar" } },
+    { "en": { "word": "Tower Bridge", "hint": "Thames" }, "sr": { "word": "Tauer bridž", "hint": "Temza" } },
+    { "en": { "word": "Brandenburg Gate", "hint": "Berlin" }, "sr": { "word": "Brandenburška kapija", "hint": "Berlin" } },
+    { "en": { "word": "Mount Rushmore", "hint": "Presidents" }, "sr": { "word": "Maunt Rašmor", "hint": "Predsednici" } },
+    { "en": { "word": "Petra", "hint": "Carved" }, "sr": { "word": "Petra", "hint": "Uklesano" } },
+    { "en": { "word": "Angkor Wat", "hint": "Temple" }, "sr": { "word": "Angkor Vat", "hint": "Hram" } },
+    { "en": { "word": "Hagia Sophia", "hint": "Dome" }, "sr": { "word": "Aja Sofija", "hint": "Kupola" } },
+    { "en": { "word": "Hollywood Sign", "hint": "Letters" }, "sr": { "word": "Holivudski natpis", "hint": "Slova" } },
+    { "en": { "word": "Temple of Saint Sava", "hint": "Vračar" }, "sr": { "word": "Hram Svetog Save", "hint": "Vračar" } },
+    { "en": { "word": "Petrovaradin Fortress", "hint": "Novi Sad" }, "sr": { "word": "Petrovaradinska tvrđava", "hint": "Novi Sad" } }
   ]
 }
