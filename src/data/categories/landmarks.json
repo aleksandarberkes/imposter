@@ -1,0 +1,16 @@
+{
+  "id": "landmarks",
+  "name": { "en": "Landmarks", "sr": "Znamenitosti" },
+  "words": [
+    { "en": { "word": "Eiffel Tower", "hint": "Iron" }, "sr": { "word": "Ajfelov toranj", "hint": "Gvožđe" } },
+    { "en": { "word": "Great Wall of China", "hint": "Long" }, "sr": { "word": "Kineski zid", "hint": "Dugačak" } },
+    { "en": { "word": "Statue of Liberty", "hint": "Torch" }, "sr": { "word": "Kip slobode", "hint": "Baklja" } },
+    { "en": { "word": "Pyramids of Giza", "hint": "Pharaoh" }, "sr": { "word": "Piramide u Gizi", "hint": "Faraon" } },
+    { "en": { "word": "Colosseum", "hint": "Gladiator" }, "sr": { "word": "Koloseum", "hint": "Gladijator" } },
+    { "en": { "word": "Taj Mahal", "hint": "Marble" }, "sr": { "word": "Tadž Mahal", "hint": "Mermer" } },
+    { "en": { "word": "Big Ben", "hint": "Clock" }, "sr": { "word": "Big Ben", "hint": "Sat" } },
+    { "en": { "word": "Kalemegdan", "hint": "Fortress" }, "sr": { "word": "Kalemegdan", "hint": "Tvrđava" } },
+    { "en": { "word": "Stonehenge", "hint": "Stones" }, "sr": { "word": "Stounhendž", "hint": "Kamenje" } },
+    { "en": { "word": "Christ the Redeemer", "hint": "Arms" }, "sr": { "word": "Hrist Iskupitelj", "hint": "Ruke" } }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "nature",
+  "name": { "en": "Natural wonders", "sr": "Prirodna čuda" },
+  "words": [
+    { "en": { "word": "Mount Everest", "hint": "Highest" }, "sr": { "word": "Mont Everest", "hint": "Najviši" } },
+    { "en": { "word": "Amazon River", "hint": "Jungle" }, "sr": { "word": "Amazon", "hint": "Džungla" } },
+    { "en": { "word": "Sahara", "hint": "Sand" }, "sr": { "word": "Sahara", "hint": "Pesak" } },
+    { "en": { "word": "Grand Canyon", "hint": "Deep" }, "sr": { "word": "Veliki kanjon", "hint": "Duboko" } },
+    { "en": { "word": "Niagara Falls", "hint": "Waterfall" }, "sr": { "word": "Nijagarini vodopadi", "hint": "Vodopad" } },
+    { "en": { "word": "Danube", "hint": "Belgrade" }, "sr": { "word": "Dunav", "hint": "Beograd" } },
+    { "en": { "word": "Great Barrier Reef", "hint": "Coral" }, "sr": { "word": "Veliki koralni greben", "hint": "Koral" } },
+    { "en": { "word": "Alps", "hint": "Skiing" }, "sr": { "word": "Alpi", "hint": "Skijanje" } },
+    { "en": { "word": "Iceland volcanoes", "hint": "Lava" }, "sr": { "word": "Islandski vulkani", "hint": "Lava" } },
+    { "en": { "word": "Đavolja Varoš", "hint": "Stone towers" }, "sr": { "word": "Đavolja varoš", "hint": "Kameni stubovi" } }
+  ]
+}

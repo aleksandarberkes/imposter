@@ -1,0 +1,16 @@
+{
+  "id": "cities",
+  "name": { "en": "Cities", "sr": "Gradovi" },
+  "words": [
+    { "en": { "word": "Paris", "hint": "Romance" }, "sr": { "word": "Pariz", "hint": "Romantika" } },
+    { "en": { "word": "New York", "hint": "Skyscrapers" }, "sr": { "word": "Njujork", "hint": "Neboderi" } },
+    { "en": { "word": "Belgrade", "hint": "Nightlife" }, "sr": { "word": "Beograd", "hint": "Noćni život" } },
+    { "en": { "word": "Tokyo", "hint": "Neon" }, "sr": { "word": "Tokio", "hint": "Neon" } },
+    { "en": { "word": "London", "hint": "Rain" }, "sr": { "word": "London", "hint": "Kiša" } },
+    { "en": { "word": "Rome", "hint": "Colosseum" }, "sr": { "word": "Rim", "hint": "Koloseum" } },
+    { "en": { "word": "Dubai", "hint": "Luxury" }, "sr": { "word": "Dubai", "hint": "Luksuz" } },
+    { "en": { "word": "Venice", "hint": "Gondola" }, "sr": { "word": "Venecija", "hint": "Gondola" } },
+    { "en": { "word": "Novi Sad", "hint": "Exit" }, "sr": { "word": "Novi Sad", "hint": "Exit" } },
+    { "en": { "word": "Las Vegas", "hint": "Casino" }, "sr": { "word": "Las Vegas", "hint": "Kazino" } }
+  ]
+}

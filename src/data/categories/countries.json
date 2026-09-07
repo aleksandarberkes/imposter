@@ -1,0 +1,16 @@
+{
+  "id": "countries",
+  "name": { "en": "Countries", "sr": "Države" },
+  "words": [
+    { "en": { "word": "Japan", "hint": "Sushi" }, "sr": { "word": "Japan", "hint": "Suši" } },
+    { "en": { "word": "Brazil", "hint": "Carnival" }, "sr": { "word": "Brazil", "hint": "Karneval" } },
+    { "en": { "word": "Italy", "hint": "Pasta" }, "sr": { "word": "Italija", "hint": "Pasta" } },
+    { "en": { "word": "Egypt", "hint": "Pyramids" }, "sr": { "word": "Egipat", "hint": "Piramide" } },
+    { "en": { "word": "Australia", "hint": "Kangaroo" }, "sr": { "word": "Australija", "hint": "Kengur" } },
+    { "en": { "word": "Serbia", "hint": "Rakija" }, "sr": { "word": "Srbija", "hint": "Rakija" } },
+    { "en": { "word": "Germany", "hint": "Beer" }, "sr": { "word": "Nemačka", "hint": "Pivo" } },
+    { "en": { "word": "Mexico", "hint": "Tacos" }, "sr": { "word": "Meksiko", "hint": "Takos" } },
+    { "en": { "word": "Russia", "hint": "Winter" }, "sr": { "word": "Rusija", "hint": "Zima" } },
+    { "en": { "word": "Greece", "hint": "Islands" }, "sr": { "word": "Grčka", "hint": "Ostrva" } }
+  ]
+}
