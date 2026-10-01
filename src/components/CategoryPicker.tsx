@@ -1,33 +1,59 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "./Button";
 import { Sticker } from "./Sticker";
-import { groups } from "@/data/groups";
-import { t } from "@/lib/i18n";
-import type { Category, Language } from "@/lib/types";
+
+export type PickerItem = {
+  id: string;
+  icon: string;
+  name: string;
+  /** How many words/topics the category holds. */
+  count: number;
+};
+
+export type PickerSection = {
+  id: string;
+  /** Section heading. Omit for a flat list without per-section select-all. */
+  label?: string;
+  items: PickerItem[];
+};
+
+export type PickerLabels = {
+  title: string;
+  selected: string;
+  /** Unit for the counts, e.g. "words" or "topics". */
+  unit: string;
+  done: string;
+  selectAll: string;
+  deselectAll: string;
+  /** Per-section "clear" link. */
+  clear: string;
+  /** Shown instead of Done while nothing is selected. */
+  pickOne: string;
+};
 
 type Props = {
-  categories: Category[];
+  sections: PickerSection[];
   /** Selected ids. Empty array means "all". */
   value: string[];
-  language: Language;
+  labels: PickerLabels;
   onChange: (next: string[]) => void;
   onClose: () => void;
 };
 
-/** Full-screen sheet for choosing categories, grouped by section. */
-export function CategoryPicker({ categories, value, language, onChange, onClose }: Props) {
-  const s = t(language);
-  const allIds = useMemo(() => categories.map((c) => c.id), [categories]);
-  const selected = useMemo(
+/** Full-screen sheet for choosing categories, optionally grouped by section. */
+export function CategoryPicker({ sections, value, labels, onChange, onClose }: Props) {
+  const items = useMemo(() => sections.flatMap((s) => s.items), [sections]);
+  const allIds = useMemo(() => items.map((c) => c.id), [items]);
+  // Local draft so the list can be emptied ("deselect all, then pick").
+  // Only non-empty selections are saved; Done is disabled while it's empty.
+  const [selected, setSelected] = useState(
     () => new Set(value.length === 0 ? allIds : value),
-    [value, allIds],
   );
   const isAll = selected.size === allIds.length;
-  const wordCount = categories
-    .filter((c) => selected.has(c.id))
-    .reduce((n, c) => n + c.words.length, 0);
+  const isNone = selected.size === 0;
+  const total = items.filter((c) => selected.has(c.id)).reduce((n, c) => n + c.count, 0);
 
   // Lock body scroll while the sheet is open.
   useEffect(() => {
@@ -39,7 +65,8 @@ export function CategoryPicker({ categories, value, language, onChange, onClose 
   }, []);
 
   const commit = (next: Set<string>) => {
-    if (next.size === 0) return; // always keep at least one category
+    setSelected(next);
+    if (next.size === 0) return; // never save an empty selection
     onChange(next.size === allIds.length ? [] : allIds.filter((id) => next.has(id)));
   };
 
@@ -65,52 +92,64 @@ export function CategoryPicker({ categories, value, language, onChange, onClose 
       {/* Header */}
       <header className="flex items-center justify-between gap-3 border-b-2 border-fg/10 px-4 py-3">
         <div>
-          <h2 className="font-display text-xl leading-none text-fg">{s.categories}</h2>
+          <h2 className="font-display text-xl leading-none text-fg">{labels.title}</h2>
           <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-muted">
-            {selected.size}/{allIds.length} {s.selected} · {wordCount} {s.words}
+            {selected.size}/{allIds.length} {labels.selected} · {total} {labels.unit}
           </p>
         </div>
-        <Button variant="cyan" onClick={onClose}>
-          {s.done}
+        <Button variant="cyan" onClick={onClose} disabled={isNone}>
+          {labels.done}
         </Button>
       </header>
 
       {/* Body */}
       <div className="flex-1 overflow-y-auto px-4 pb-28 pt-4">
-        <button
-          type="button"
-          aria-pressed={isAll}
-          onClick={() => commit(new Set(allIds))}
-          className={`cut-corners-sm mb-5 flex min-h-12 w-full items-center justify-between px-4 font-mono text-sm font-bold uppercase tracking-wide ${
-            isAll ? "bg-pink text-ink" : "bg-bg-2 text-fg border border-fg/25"
-          }`}
-        >
-          <span>✦ {s.allCategories}</span>
-          <span className="opacity-70">{allIds.length}</span>
-        </button>
+        <div className="mb-5 grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            aria-pressed={isAll}
+            onClick={() => commit(new Set(allIds))}
+            className={`cut-corners-sm min-h-12 px-3 font-mono text-xs font-bold uppercase tracking-wide transition-transform active:scale-[0.98] ${
+              isAll ? "bg-pink text-ink" : "bg-bg-2 text-fg border border-fg/25"
+            }`}
+          >
+            ✦ {labels.selectAll}
+          </button>
+          <button
+            type="button"
+            aria-pressed={isNone}
+            onClick={() => commit(new Set())}
+            className={`cut-corners-sm min-h-12 px-3 font-mono text-xs font-bold uppercase tracking-wide transition-transform active:scale-[0.98] ${
+              isNone ? "bg-yellow text-ink" : "bg-bg-2 text-fg border border-fg/25"
+            }`}
+          >
+            ✕ {labels.deselectAll}
+          </button>
+        </div>
 
-        {groups.map((g) => {
-          const items = categories.filter((c) => c.group === g.id);
-          if (items.length === 0) return null;
-          const ids = items.map((c) => c.id);
+        {sections.map((g) => {
+          if (g.items.length === 0) return null;
+          const ids = g.items.map((c) => c.id);
           const on = ids.filter((id) => selected.has(id)).length;
           const allOn = on === ids.length;
           return (
             <section key={g.id} className="mb-6 animate-slide-up">
-              <div className="mb-2 flex items-center justify-between">
-                <Sticker color={allOn ? "lime" : on > 0 ? "yellow" : "cyan"} tilt={-1.5}>
-                  {g.icon} {g.name[language]} · {on}/{ids.length}
-                </Sticker>
-                <button
-                  type="button"
-                  onClick={() => toggleGroup(ids, allOn)}
-                  className="min-h-9 px-2 font-mono text-[11px] uppercase tracking-widest text-muted underline-offset-4 active:underline"
-                >
-                  {allOn ? s.clear : s.selectAll}
-                </button>
-              </div>
+              {g.label && (
+                <div className="mb-2 flex items-center justify-between">
+                  <Sticker color={allOn ? "lime" : on > 0 ? "yellow" : "cyan"} tilt={-1.5}>
+                    {g.label} · {on}/{ids.length}
+                  </Sticker>
+                  <button
+                    type="button"
+                    onClick={() => toggleGroup(ids, allOn)}
+                    className="min-h-9 px-2 font-mono text-[11px] uppercase tracking-widest text-muted underline-offset-4 active:underline"
+                  >
+                    {allOn ? labels.clear : labels.selectAll}
+                  </button>
+                </div>
+              )}
               <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {items.map((c) => {
+                {g.items.map((c) => {
                   const active = selected.has(c.id);
                   return (
                     <li key={c.id}>
@@ -126,9 +165,9 @@ export function CategoryPicker({ categories, value, language, onChange, onClose 
                       >
                         <span className="text-xl">{c.icon}</span>
                         <span className="flex-1 font-mono text-sm font-bold uppercase tracking-wide">
-                          {c.name[language]}
+                          {c.name}
                         </span>
-                        <span className="font-mono text-[11px] opacity-60">{c.words.length}</span>
+                        <span className="font-mono text-[11px] opacity-60">{c.count}</span>
                         <span
                           aria-hidden
                           className={`flex size-6 items-center justify-center font-display text-sm ${
@@ -149,8 +188,8 @@ export function CategoryPicker({ categories, value, language, onChange, onClose 
 
       {/* Footer */}
       <footer className="absolute inset-x-0 bottom-0 border-t-2 border-fg/10 bg-bg/95 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <Button size="lg" className="w-full" onClick={onClose}>
-          ✓ {s.done} · {wordCount} {s.words}
+        <Button size="lg" className="w-full" onClick={onClose} disabled={isNone}>
+          {isNone ? labels.pickOne : `✓ ${labels.done} · ${total} ${labels.unit}`}
         </Button>
       </footer>
     </div>

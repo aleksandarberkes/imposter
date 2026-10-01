@@ -1,0 +1,179 @@
+[
+  {
+    "id": "everyday",
+    "icon": "🏠",
+    "name": { "en": "Everyday", "sr": "Svakodnevica" },
+    "prompts": [
+      { "en": "Things in a kitchen", "sr": "Stvari u kuhinji" },
+      { "en": "Things in a bathroom", "sr": "Stvari u kupatilu" },
+      { "en": "Things in a supermarket", "sr": "Stvari u supermarketu" },
+      { "en": "Things you find in a school bag", "sr": "Stvari u školskoj torbi" },
+      { "en": "Things in an office", "sr": "Stvari u kancelariji" },
+      { "en": "Things you plug in", "sr": "Stvari koje se uključuju u struju" },
+      { "en": "Things you take to the beach", "sr": "Stvari koje nosiš na plažu" },
+      { "en": "Furniture", "sr": "Nameštaj" },
+      { "en": "Tools", "sr": "Alati" },
+      { "en": "Clothing items", "sr": "Odevni predmeti" },
+      { "en": "Body parts", "sr": "Delovi tela" },
+      { "en": "Colors", "sr": "Boje" },
+      { "en": "Professions", "sr": "Zanimanja" },
+      { "en": "School subjects", "sr": "Školski predmeti" },
+      { "en": "Hobbies", "sr": "Hobiji" },
+      { "en": "Means of transport", "sr": "Prevozna sredstva" }
+    ]
+  },
+  {
+    "id": "places",
+    "icon": "📍",
+    "name": { "en": "Places & events", "sr": "Mesta i događaji" },
+    "prompts": [
+      { "en": "Things at an airport", "sr": "Stvari na aerodromu" },
+      { "en": "Things in a hospital", "sr": "Stvari u bolnici" },
+      { "en": "Things at a gym", "sr": "Stvari u teretani" },
+      { "en": "Things at a wedding", "sr": "Stvari na svadbi" },
+      { "en": "Things at a birthday party", "sr": "Stvari na rođendanu" },
+      { "en": "Things at a gas station", "sr": "Stvari na benzinskoj pumpi" },
+      { "en": "Things in a classroom", "sr": "Stvari u učionici" },
+      { "en": "Things at a campsite", "sr": "Stvari na kampovanju" },
+      { "en": "Holidays and celebrations", "sr": "Praznici i proslave" }
+    ]
+  },
+  {
+    "id": "food",
+    "icon": "🍕",
+    "name": { "en": "Food & drink", "sr": "Hrana i piće" },
+    "prompts": [
+      { "en": "Fruits", "sr": "Voće" },
+      { "en": "Vegetables", "sr": "Povrće" },
+      { "en": "Drinks", "sr": "Pića" },
+      { "en": "Cocktails and alcoholic drinks", "sr": "Kokteli i alkoholna pića" },
+      { "en": "Pizza toppings", "sr": "Dodaci za picu" },
+      { "en": "Desserts", "sr": "Dezerti" },
+      { "en": "Fast food", "sr": "Brza hrana" },
+      { "en": "Breakfast foods", "sr": "Hrana za doručak" },
+      { "en": "Spices and herbs", "sr": "Začini i začinsko bilje" },
+      { "en": "Things you put on a barbecue", "sr": "Stvari koje idu na roštilj" }
+    ]
+  },
+  {
+    "id": "nature",
+    "icon": "🦁",
+    "name": { "en": "Animals & nature", "sr": "Životinje i priroda" },
+    "prompts": [
+      { "en": "Animals", "sr": "Životinje" },
+      { "en": "Birds", "sr": "Ptice" },
+      { "en": "Sea creatures", "sr": "Morska stvorenja" },
+      { "en": "Dog breeds", "sr": "Rase pasa" },
+      { "en": "Insects", "sr": "Insekti" },
+      { "en": "Farm animals", "sr": "Domaće životinje" },
+      { "en": "Flowers and trees", "sr": "Cveće i drveće" },
+      { "en": "Planets and things in space", "sr": "Planete i stvari u svemiru" }
+    ]
+  },
+  {
+    "id": "geography",
+    "icon": "🌍",
+    "name": { "en": "Geography", "sr": "Geografija" },
+    "prompts": [
+      { "en": "Countries in Europe", "sr": "Države u Evropi" },
+      { "en": "Countries outside Europe", "sr": "Države van Evrope" },
+      { "en": "Capital cities", "sr": "Glavni gradovi" },
+      { "en": "Cities in Serbia", "sr": "Gradovi u Srbiji" },
+      { "en": "Rivers, lakes and seas", "sr": "Reke, jezera i mora" },
+      { "en": "Islands", "sr": "Ostrva" },
+      { "en": "Famous landmarks", "sr": "Poznate znamenitosti" },
+      { "en": "Languages", "sr": "Jezici" }
+    ]
+  },
+  {
+    "id": "entertainment",
+    "icon": "🎬",
+    "name": { "en": "Entertainment", "sr": "Zabava" },
+    "prompts": [
+      { "en": "Movies", "sr": "Filmovi" },
+      { "en": "TV series", "sr": "Serije" },
+      { "en": "Disney and Pixar movies", "sr": "Dizni i Piksar filmovi" },
+      { "en": "Cartoon characters", "sr": "Likovi iz crtanih filmova" },
+      { "en": "Superheroes and villains", "sr": "Superheroji i zlikovci" },
+      { "en": "Mythical creatures", "sr": "Mitska bića" },
+      { "en": "Actors and actresses", "sr": "Glumci i glumice" },
+      { "en": "Singers and bands", "sr": "Pevači i bendovi" },
+      { "en": "Musical instruments", "sr": "Muzički instrumenti" },
+      { "en": "Video games", "sr": "Video igre" },
+      { "en": "Board and card games", "sr": "Društvene igre i igre sa kartama" }
+    ]
+  },
+  {
+    "id": "sports",
+    "icon": "⚽",
+    "name": { "en": "Sports", "sr": "Sport" },
+    "prompts": [
+      { "en": "Sports", "sr": "Sportovi" },
+      { "en": "Football clubs", "sr": "Fudbalski klubovi" },
+      { "en": "Famous athletes", "sr": "Poznati sportisti" },
+      { "en": "Football players", "sr": "Fudbaleri" },
+      { "en": "Basketball players", "sr": "Košarkaši" },
+      { "en": "Tennis players", "sr": "Teniseri" },
+      { "en": "Olympic sports", "sr": "Olimpijski sportovi" },
+      { "en": "Sports equipment", "sr": "Sportska oprema" }
+    ]
+  },
+  {
+    "id": "brands",
+    "icon": "🏷️",
+    "name": { "en": "Brands & tech", "sr": "Brendovi i tehnologija" },
+    "prompts": [
+      { "en": "Car brands", "sr": "Marke automobila" },
+      { "en": "Tech brands", "sr": "Tehnološki brendovi" },
+      { "en": "Clothing brands", "sr": "Brendovi odeće" },
+      { "en": "Apps on your phone", "sr": "Aplikacije na telefonu" },
+      { "en": "Websites", "sr": "Sajtovi" },
+      { "en": "Social networks", "sr": "Društvene mreže" }
+    ]
+  },
+  {
+    "id": "letters",
+    "icon": "🔤",
+    "name": { "en": "Letters & names", "sr": "Slova i imena" },
+    "prompts": [
+      { "en": "Male names", "sr": "Muška imena" },
+      { "en": "Female names", "sr": "Ženska imena" },
+      { "en": "Names starting with M", "sr": "Imena na slovo M" },
+      { "en": "Names starting with A", "sr": "Imena na slovo A" },
+      { "en": "Words starting with S", "sr": "Reči na slovo S" },
+      { "en": "Words starting with K", "sr": "Reči na slovo K" },
+      { "en": "Words starting with B", "sr": "Reči na slovo B" },
+      { "en": "Animals starting with P", "sr": "Životinje na slovo P" }
+    ]
+  },
+  {
+    "id": "things-that",
+    "icon": "🧩",
+    "name": { "en": "Things that…", "sr": "Stvari koje…" },
+    "prompts": [
+      { "en": "Things that fly", "sr": "Stvari koje lete" },
+      { "en": "Things with wheels", "sr": "Stvari sa točkovima" },
+      { "en": "Things that are red", "sr": "Stvari koje su crvene" },
+      { "en": "Things that are round", "sr": "Stvari koje su okrugle" },
+      { "en": "Things that are cold", "sr": "Stvari koje su hladne" },
+      { "en": "Things that are sticky", "sr": "Stvari koje su lepljive" },
+      { "en": "Things that make noise", "sr": "Stvari koje prave buku" },
+      { "en": "Things that smell good", "sr": "Stvari koje lepo mirišu" }
+    ]
+  },
+  {
+    "id": "funny",
+    "icon": "😂",
+    "name": { "en": "Funny", "sr": "Smešno" },
+    "prompts": [
+      { "en": "Excuses for being late", "sr": "Izgovori za kašnjenje" },
+      { "en": "Reasons to skip work", "sr": "Razlozi da ne odeš na posao" },
+      { "en": "Things you shouldn't say on a first date", "sr": "Stvari koje ne treba reći na prvom sastanku" },
+      { "en": "Things grandma always says", "sr": "Stvari koje baka uvek kaže" },
+      { "en": "Things you lose all the time", "sr": "Stvari koje stalno gubiš" },
+      { "en": "Things you do when nobody is watching", "sr": "Stvari koje radiš kad niko ne gleda" },
+      { "en": "Bad gifts", "sr": "Loši pokloni" },
+      { "en": "Things you shouldn't say to your boss", "sr": "Stvari koje ne treba reći šefu" }
+    ]
+  }
+]

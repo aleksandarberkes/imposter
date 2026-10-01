@@ -1,8 +1,6 @@
-import { App } from "@/components/App";
-import { categories } from "@/data";
+import { MainMenu } from "@/components/MainMenu";
 
-// Server component: reads the word files at build time and hands them to the
-// client app. No database, no API calls.
+// Main menu: pick a game. Each game lives under its own route.
 export default function Home() {
-  return <App categories={categories} />;
+  return <MainMenu />;
 }

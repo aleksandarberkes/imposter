@@ -1,6 +1,6 @@
 // All word data lives in JSON files in ./categories. No database.
 // Add a new file there and register it here (keep alphabetical).
-import type { Category } from "@/lib/types";
+import type { Category } from "@/games/imposter/lib/types";
 import animals from "./categories/animals.json";
 import anime from "./categories/anime.json";
 import athletes from "./categories/athletes.json";

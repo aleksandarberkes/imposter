@@ -1,4 +1,5 @@
 import type { Category, Game, Settings } from "./types";
+import type { Language } from "@/lib/language";
 
 function randomInt(max: number) {
   return Math.floor(Math.random() * max);
@@ -10,11 +11,11 @@ export function pickCategories(all: Category[], selected: string[]) {
   return picked.length > 0 ? picked : all;
 }
 
-export function createGame(settings: Settings, all: Category[]): Game {
+export function createGame(settings: Settings, language: Language, all: Category[]): Game {
   const pool = pickCategories(all, settings.categories);
   // Weight by word count so every word is equally likely, not every category.
   const flat = pool.flatMap((c) =>
-    c.words.map((w) => ({ categoryId: c.id, entry: w[settings.language] })),
+    c.words.map((w) => ({ categoryId: c.id, entry: w[language] })),
   );
   const { categoryId, entry } = flat[randomInt(flat.length)];
   const n = settings.players;

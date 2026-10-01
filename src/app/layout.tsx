@@ -21,15 +21,15 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Imposter",
-    template: "%s · Imposter",
+    default: "Party Games",
+    template: "%s · Party Games",
   },
-  description: "Pass-the-phone party game. One of you is lying.",
-  applicationName: "Imposter",
+  description: "Pass-the-phone party games: Imposter and Bomb.",
+  applicationName: "Party Games",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Imposter",
+    title: "Party Games",
   },
   formatDetection: { telephone: false },
 };

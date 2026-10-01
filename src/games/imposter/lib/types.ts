@@ -1,4 +1,4 @@
-export type Language = "en" | "sr";
+import type { Language } from "@/lib/language";
 
 export type LocalizedWord = { word: string; hint: string };
 
@@ -24,7 +24,6 @@ export type Category = {
 
 export type Settings = {
   players: number;
-  language: Language;
   /** Selected category ids. Empty array means "all". */
   categories: string[];
   hint: boolean;
@@ -47,7 +46,6 @@ export const MAX_PLAYERS = 12;
 
 export const DEFAULT_SETTINGS: Settings = {
   players: 4,
-  language: "en",
   categories: [],
   hint: true,
 };

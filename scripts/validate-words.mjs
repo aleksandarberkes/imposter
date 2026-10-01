@@ -1,9 +1,10 @@
-// Validates every category file in src/data/categories.
+// Validates the Imposter category files in src/games/imposter/data/categories
+// and the Bomb topics in src/games/bomb/data/categories.json.
 // Usage: node scripts/validate-words.mjs [--min N]
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const dir = join(process.cwd(), "src/data/categories");
+const dir = join(process.cwd(), "src/games/imposter/data/categories");
 const GROUPS = new Set(["everyday", "geography", "games", "entertainment", "music", "sports"]);
 const minArg = process.argv.indexOf("--min");
 const MIN = minArg > -1 ? Number(process.argv[minArg + 1]) : 10;
@@ -42,5 +43,37 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith(".json")).sort()) {
   if (!errors) console.log(`✓ ${file} (${c.words.length} words, ${c.group})`);
   else console.log(`  ${file}: ${c.words.length} words`);
 }
+
+// Bomb topics: [{ id, icon, name: {en, sr}, prompts: [{ en, sr }] }]
+{
+  const file = "bomb/categories.json";
+  try {
+    const list = JSON.parse(readFileSync(join(process.cwd(), "src/games/bomb/data/categories.json"), "utf8"));
+    if (!Array.isArray(list)) err(file, "must be an array");
+    else {
+      const bombIds = new Set();
+      const seen = { en: new Set(), sr: new Set() };
+      let total = 0;
+      for (const c of list) {
+        const where = `${file} [${c?.id}]`;
+        if (typeof c?.id !== "string" || !/^[a-z0-9-]+$/.test(c.id)) err(where, "id must be kebab-case");
+        if (bombIds.has(c?.id)) err(where, "duplicate id"); bombIds.add(c?.id);
+        if (typeof c?.icon !== "string" || c.icon.length === 0 || c.icon.length > 4) err(where, "icon must be one emoji");
+        for (const l of ["en", "sr"]) if (!c?.name?.[l]) err(where, `missing name.${l}`);
+        if (!Array.isArray(c?.prompts) || c.prompts.length === 0) { err(where, "prompts must be a non-empty array"); continue; }
+        c.prompts.forEach((p, i) => {
+          for (const l of ["en", "sr"]) {
+            if (typeof p?.[l] !== "string" || !p[l].trim()) { err(where, `prompt #${i + 1} missing ${l}`); continue; }
+            if (seen[l].has(norm(p[l]))) err(where, `duplicate ${l} prompt "${p[l]}"`);
+            seen[l].add(norm(p[l]));
+          }
+        });
+        total += c.prompts.length;
+      }
+      if (!errors) console.log(`✓ ${file} (${list.length} categories, ${total} topics)`);
+    }
+  } catch (e) { err(file, `invalid JSON: ${e.message}`); }
+}
+
 console.log(errors ? `\n${errors} error(s)` : "\nAll word files valid.");
 process.exit(errors ? 1 : 0);

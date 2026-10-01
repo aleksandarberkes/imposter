@@ -31,6 +31,22 @@
   --animate-flicker: flicker 4s linear infinite;
   --animate-pop: pop 0.25s cubic-bezier(0.2, 1.4, 0.4, 1) both;
   --animate-slide-up: slide-up 0.3s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  --animate-tick: tick 1s ease-in-out infinite;
+  --animate-shake: shake 0.5s linear both;
+}
+
+@keyframes tick {
+  0%, 100% { transform: scale(1) rotate(-4deg); }
+  10% { transform: scale(1.14) rotate(4deg); }
+  30% { transform: scale(1) rotate(-4deg); }
+}
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  15% { transform: translate(-10px, 6px); }
+  30% { transform: translate(9px, -7px); }
+  45% { transform: translate(-7px, -5px); }
+  60% { transform: translate(6px, 5px); }
+  80% { transform: translate(-3px, 2px); }
 }
 
 @keyframes float {

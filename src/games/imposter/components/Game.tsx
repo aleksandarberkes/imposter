@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "./Button";
-import { Sticker } from "./Sticker";
-import { t } from "@/lib/i18n";
-import type { Category, Game as GameState, Settings } from "@/lib/types";
+import { Button } from "@/components/Button";
+import { Sticker } from "@/components/Sticker";
+import { t } from "@/games/imposter/lib/i18n";
+import type { Category, Game as GameState, Settings } from "@/games/imposter/lib/types";
+import type { Language } from "@/lib/language";
 
 type Props = {
   game: GameState;
   settings: Settings;
+  language: Language;
   categories: Category[];
   onChange: (next: GameState) => void;
   onNewRound: () => void;
@@ -17,14 +19,14 @@ type Props = {
 
 type Overlay = { index: number; revealed: boolean } | null;
 
-export function Game({ game, settings, categories, onChange, onNewRound, onExit }: Props) {
-  const s = t(settings.language);
+export function Game({ game, settings, language, categories, onChange, onNewRound, onExit }: Props) {
+  const s = t(language);
   const [overlay, setOverlay] = useState<Overlay>(null);
   const [showImposter, setShowImposter] = useState(false);
 
   const allTaken = game.cards.every((c) => c === "taken");
   const categoryName =
-    categories.find((c) => c.id === game.categoryId)?.name[settings.language] ?? "";
+    categories.find((c) => c.id === game.categoryId)?.name[language] ?? "";
 
   const open = (index: number) => {
     if (game.cards[index] === "taken") return;
